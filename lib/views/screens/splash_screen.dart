@@ -1,4 +1,5 @@
 import 'package:e_commerce/constant.dart';
+import 'package:e_commerce/views/auth/login_screen.dart';
 import 'package:e_commerce/views/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () => Get.to(
-        () => HomeScreen(),
+        () => LoginScreen(),
       ),
     );
     super.initState();
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.deep_orrange,
+      backgroundColor: AppColors.deep_orange,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
