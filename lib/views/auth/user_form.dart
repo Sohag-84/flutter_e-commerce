@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/auth_controller.dart';
-import 'package:e_commerce/views/bottom_nave_controller.dart';
+import 'package:e_commerce/views/bottom_nav_controller/bottom_nave_controller.dart';
 import 'package:e_commerce/views/widgets/custom_button.dart';
 import 'package:e_commerce/views/widgets/my_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';

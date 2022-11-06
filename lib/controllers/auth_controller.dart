@@ -3,7 +3,7 @@
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/models/user_model.dart';
 import 'package:e_commerce/views/auth/user_form.dart';
-import 'package:e_commerce/views/bottom_nave_controller.dart';
+import 'package:e_commerce/views/bottom_nav_controller/bottom_nave_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
