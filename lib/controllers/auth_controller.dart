@@ -124,11 +124,11 @@ class AuthController extends GetxController {
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
+  }
 
-    //user logout
-    userLogout() async {
-      await firebaseAuth.signOut();
-      Fluttertoast.showToast(msg: "Log out");
-    }
+  //user logout
+  userLogout() async {
+    await firebaseAuth.signOut();
+    Fluttertoast.showToast(msg: "Log out");
   }
 }
