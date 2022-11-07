@@ -6,6 +6,7 @@ import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/bottom_controller.dart';
 import 'package:e_commerce/controllers/carousel_image_controller.dart';
 import 'package:e_commerce/controllers/product_controller.dart';
+import 'package:e_commerce/views/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,6 @@ class HomePage extends StatelessWidget {
   final CarouselImageController _carouselController =
       Get.put(CarouselImageController());
   final ProductController _productController = Get.put(ProductController());
-  final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,45 +25,47 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 55.h,
-                    child: TextFormField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        hintText: "Search products here",
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0.r),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0.r),
-                          borderSide: BorderSide(color: Colors.blue),
+            InkWell(
+              onTap: () => Get.to(() => SearchScreen()),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 55.h,
+                      child: TextFormField(
+                        readOnly: true,
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          hintText: "Search products here",
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(0.r),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(0.r),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 55.h,
-                  width: 55.w,
-                  decoration: BoxDecoration(
-                    //borderRadius: BorderRadius.circular(5.r),
-                    color: AppColors.deep_orange,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: 28.h,
+                  Container(
+                    height: 55.h,
+                    width: 55.w,
+                    decoration: BoxDecoration(
+                      //borderRadius: BorderRadius.circular(5.r),
+                      color: AppColors.deep_orange,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 28.h,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10.h),
-              ],
+                ],
+              ),
             ),
             SizedBox(height: 15.h),
             Obx(

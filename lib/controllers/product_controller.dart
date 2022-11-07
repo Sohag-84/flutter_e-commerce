@@ -5,6 +5,12 @@ import 'package:get/get.dart';
 class ProductController extends GetxController{
   var productImages = [].obs;
 
+  //for search product screen
+  var inputText = "".obs;
+
+  updateText(value){
+    inputText.value = value;
+  }
 
   //fetch product image from firebase firestore
   fetchProductImage() async{
