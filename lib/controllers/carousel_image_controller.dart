@@ -9,6 +9,7 @@ class CarouselImageController extends GetxController{
   //for dot indicator
   changeDotIndicator(value){
     dotPosition.value = value;
+    update();
   }
 
   //fetch carousel image from firebase firestore

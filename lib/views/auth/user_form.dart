@@ -1,12 +1,9 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, prefer_const_constructors
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/auth_controller.dart';
-import 'package:e_commerce/views/bottom_nav_controller/bottom_nave_controller.dart';
 import 'package:e_commerce/views/widgets/custom_button.dart';
 import 'package:e_commerce/views/widgets/my_text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -40,10 +37,11 @@ class _UserFormScreenState extends State<UserFormScreen> {
       firstDate: DateTime(DateTime.now().year - 30),
       lastDate: DateTime(DateTime.now().year),
     );
-    if (picked != null)
+    if (picked != null) {
       setState(() {
         _dobController.text = "${picked.day}/ ${picked.month}/ ${picked.year}";
       });
+    }
   }
 
   @override
@@ -104,7 +102,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                       items: gender.map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: new Text(value),
+                          child: Text(value),
                           onTap: () {
                             setState(() {
                               _genderController.text = value;
@@ -127,7 +125,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                 ),
 
                 // elevated button
-                customButton(
+                CustomButton(
                   "Continue",
                   () => _authController.sendUserDataToDb(
                     username: _nameController.text,

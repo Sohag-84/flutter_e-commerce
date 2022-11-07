@@ -4,7 +4,7 @@ import 'package:e_commerce/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget customButton (String buttonText,onPressed){
+Widget CustomButton (String buttonText,onPressed){
   return SizedBox(
     width: 1.sw,
     height: 56.h,
@@ -16,7 +16,7 @@ Widget customButton (String buttonText,onPressed){
             color: Colors.white, fontSize: 18.sp),
       ),
       style: ElevatedButton.styleFrom(
-        primary: AppColors.deep_orange,
+        backgroundColor: AppColors.deep_orange,
         elevation: 3,
       ),
     ),

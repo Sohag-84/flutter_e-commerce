@@ -1,6 +1,5 @@
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/views/auth/login_screen.dart';
-import 'package:e_commerce/views/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

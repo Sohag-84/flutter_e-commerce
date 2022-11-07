@@ -3,9 +3,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce/constant.dart';
-import 'package:e_commerce/controllers/bottom_controller.dart';
 import 'package:e_commerce/controllers/carousel_image_controller.dart';
 import 'package:e_commerce/controllers/product_controller.dart';
+import 'package:e_commerce/views/screens/product_details_screen.dart';
 import 'package:e_commerce/views/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
                       viewportFraction: 0.8,
                       //enlargeStrategy: CenterPageEnlargeStrategy.height,
                       onPageChanged: (val, carouselPageChangedReason) {
-                        _carouselController.changeDotIndicator(val);
+                        return _carouselController.changeDotIndicator(val);
                       },
                     ),
                   ),
@@ -104,9 +104,9 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 10.h),
             Obx(
               () => DotsIndicator(
-                dotsCount: _carouselController.carouselImages.value.length == 0
+                dotsCount: _carouselController.carouselImages.length == 0
                     ? 1
-                    : _carouselController.carouselImages.value.length,
+                    : _carouselController.carouselImages.length,
                 position: _carouselController.dotPosition.value.toDouble(),
                 decorator: DotsDecorator(
                   activeColor: AppColors.deep_orange,
@@ -148,46 +148,49 @@ class HomePage extends StatelessWidget {
                     return SizedBox(
                       height: 150.h,
                       width: 150.w,
-                      child: Card(
-                        elevation: 1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AspectRatio(
-                              aspectRatio: 1.5,
-                              child: Image.network(
-                                data['product_image'][0],
-                                fit: BoxFit.fill,
+                      child: InkWell(
+                        onTap: ()=> Get.to(()=> ProductDetailsScreen(product: data),transition: Transition.zoom),
+                        child: Card(
+                          elevation: 1,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 1.5,
+                                child: Image.network(
+                                  data['product_image'][0],
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8.w, vertical: 1.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    data['product_name'],
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w500,
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8.w, vertical: 1.h),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      data['product_name'],
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "${data['product_price']} ৳",
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black54,
+                                    Text(
+                                      "${data['product_price']} ৳",
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black54,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );

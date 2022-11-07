@@ -4,11 +4,9 @@ import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/auth_controller.dart';
 import 'package:e_commerce/views/auth/registration_screen.dart';
 import 'package:e_commerce/views/widgets/custom_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -190,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 50.h,
                         ),
                         // elevated button
-                        customButton(
+                        CustomButton(
                           "Sign In",
                           () {
                             _authController.userLogin(
