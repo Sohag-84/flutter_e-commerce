@@ -5,6 +5,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/bottom_controller.dart';
 import 'package:e_commerce/controllers/carousel_image_controller.dart';
+import 'package:e_commerce/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
 
   final CarouselImageController _carouselController =
       Get.put(CarouselImageController());
+  final ProductController _productController = Get.put(ProductController());
   final _searchController = TextEditingController();
 
   @override
@@ -112,6 +114,84 @@ class HomePage extends StatelessWidget {
                   size: Size(6, 6),
                 ),
               ),
+            ),
+            SizedBox(height: 15.h),
+            Row(
+              children: [
+                Text(
+                  "Top Products",
+                  style: (TextStyle(
+                    fontSize: 17.sp,
+                  )),
+                ),
+                Expanded(child: Container()),
+                TextButton(
+                  onPressed: null,
+                  child: Text(
+                    "See All",
+                    style: TextStyle(fontSize: 17.sp, color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.h),
+            SizedBox(
+              height: 156.h,
+              child: Obx(() {
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _productController.productImages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var data = _productController.productImages[index];
+                    return SizedBox(
+                      height: 150.h,
+                      width: 150.w,
+                      child: Card(
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 1.5,
+                              child: Image.network(
+                                data['product_image'][0],
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w, vertical: 1.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data['product_name'],
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${data['product_price']} ৳",
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }),
             ),
           ],
         ),
