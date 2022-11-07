@@ -32,6 +32,9 @@ class BottomNavController extends StatelessWidget {
           return BottomNavigationBar(
             currentIndex: controller.pageIndex,
             elevation: 0,
+            selectedItemColor: Colors.deepOrange.withOpacity(.70),
+            unselectedItemColor: Colors.grey,
+            type: BottomNavigationBarType.fixed,
             onTap: (value) {
               controller.updatePageIndex(value);
             },
@@ -40,7 +43,11 @@ class BottomNavController extends StatelessWidget {
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: "Favorite"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart), label: "Home"),
+                  icon: Icon(Icons.shopping_cart), label: "Cart"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: "Profile"),
+              //BottomNavigationBarItem(icon: Icon(Icons.person),label: "Person"),
+
             ],
           );
         },

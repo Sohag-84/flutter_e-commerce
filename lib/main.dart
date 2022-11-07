@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:e_commerce/views/bottom_nav_controller/bottom_nave_controller.dart';
 import 'package:e_commerce/views/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: BottomNavController(),
+          home: SplashScreen(),
         );
       },
     );
