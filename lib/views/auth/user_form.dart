@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, prefer_const_constructors
+// ignore_for_file: prefer_final_fields
 
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/auth_controller.dart';

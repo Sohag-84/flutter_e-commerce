@@ -33,7 +33,7 @@ class AuthController extends GetxController {
 
         if (authCredential!.uid.isNotEmpty) {
           Get.to(() => UserFormScreen(email: email));
-          Get.to(() => UserFormScreen(email: authCredential.email.toString()));
+          // Get.to(() => UserFormScreen(email: authCredential.email.toString()));
         } else {
           Fluttertoast.showToast(msg: "Something is wrong!");
         }
@@ -82,17 +82,17 @@ class AuthController extends GetxController {
           .collection('user-form-data')
           .doc(firebaseAuth.currentUser!.email)
           .set(userModel.toJson())
-          .then(
-            (value) => Get.to(
-              () => BottomNavController(),
-            ),
-          )
-          .catchError(
-            (error) => Fluttertoast.showToast(
-              msg: error.toString(),
-            ),
-          );
-    }else{
+          .then((value) {
+        Get.to(
+          () => BottomNavController(),
+        );
+        Fluttertoast.showToast(msg: "Registration successful");
+      }).catchError((error) {
+        Fluttertoast.showToast(
+          msg: error.toString(),
+        );
+      });
+    } else {
       Fluttertoast.showToast(msg: "Please,enter all the field");
     }
   }
