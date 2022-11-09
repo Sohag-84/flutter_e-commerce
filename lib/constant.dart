@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce/views/bottom_nav_controller/pages/cart_page.dart';
 import 'package:e_commerce/views/bottom_nav_controller/pages/home_page.dart';
 import 'package:e_commerce/views/bottom_nav_controller/pages/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +16,7 @@ class AppColors{
 final page = [
   HomePage(),
   Center(child: Text("Favorite screen"),),
-  Center(child: Text("Cart screen"),),
+  CartPage(),
   ProfilePage(),
 ];
 

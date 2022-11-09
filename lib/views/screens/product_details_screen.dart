@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/carousel_image_controller.dart';
+import 'package:e_commerce/controllers/product_controller.dart';
 import 'package:e_commerce/views/bottom_nav_controller/pages/home_page.dart';
 import 'package:e_commerce/views/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   final CarouselImageController _carouselController =
       Get.put(CarouselImageController());
+  ProductController _productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +151,10 @@ class ProductDetailsScreen extends StatelessWidget {
             Expanded(child: Container()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: CustomButton("ADD TO CART", () {}),
+              child: CustomButton(
+                "ADD TO CART",
+                () => _productController.addToCartProduct(product),
+              ),
             ),
             SizedBox(height: 20.h),
           ],
