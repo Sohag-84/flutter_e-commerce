@@ -5,10 +5,10 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce/constant.dart';
 import 'package:e_commerce/controllers/carousel_image_controller.dart';
 import 'package:e_commerce/controllers/product_controller.dart';
-import 'package:e_commerce/views/bottom_nav_controller/pages/home_page.dart';
 import 'package:e_commerce/views/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -47,22 +47,41 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(child: Container()),
-                  Container(
-                    height: 40.h,
-                    width: 40.w,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(180.r),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () => Get.to(() => HomePage()),
-                        icon: Icon(
-                          Icons.favorite_border,
-                          color: Colors.white,
+                  StreamBuilder(
+                    stream: firestore
+                        .collection('user-favourite-items')
+                        .doc(firebaseAuth.currentUser!.email)
+                        .collection('items')
+                        .where('product_name',
+                            isEqualTo: product['product_name'])
+                        .snapshots(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.data == null) {
+                        Center(child: Text("Something is wrong!"));
+                      }
+                      return Container(
+                        height: 40.h,
+                        width: 40.w,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(180.r),
                         ),
-                      ),
-                    ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () => snapshot.data.docs.length == 0
+                                ? _productController
+                                    .addToFavouriteProduct(product)
+                                : Fluttertoast.showToast(msg: "Already added"),
+                            icon: Icon(
+                              snapshot.data.docs.length == 0
+                                  ? Icons.favorite_border
+                                  : Icons.favorite,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -151,10 +170,24 @@ class ProductDetailsScreen extends StatelessWidget {
             Expanded(child: Container()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: CustomButton(
-                "ADD TO CART",
-                () => _productController.addToCartProduct(product),
-              ),
+              child: StreamBuilder(
+                  stream: firestore
+                      .collection('user-cart-items')
+                      .doc(firebaseAuth.currentUser!.email)
+                      .collection('items')
+                      .where('product_name', isEqualTo: product['product_name'])
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      Center(child: Text("Something is wrong!"));
+                    }
+                    return CustomButton(
+                      "ADD TO CART",
+                      () => snapshot.data.docs.length == 0
+                          ? _productController.addToCartProduct(product)
+                          : Fluttertoast.showToast(msg: "Already added"),
+                    );
+                  }),
             ),
             SizedBox(height: 20.h),
           ],

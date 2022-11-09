@@ -48,6 +48,20 @@ class ProductController extends GetxController {
     }).then((value) => Fluttertoast.showToast(msg: "Added to cart"));
   }
 
+  //Product add to favourite
+  addToFavouriteProduct(productId) async {
+    CollectionReference _reference = firestore.collection("user-favourite-items");
+    _reference
+        .doc(firebaseAuth.currentUser!.email)
+        .collection("items")
+        .doc()
+        .set({
+      "product_name": productId['product_name'],
+      'product_price': productId['product_price'],
+      'product_image': productId['product_image'],
+    }).then((value) => Fluttertoast.showToast(msg: "Added to favourite"));
+  }
+
   //delete cart product
   deleteCartProduct({required productId}) {
     firestore
