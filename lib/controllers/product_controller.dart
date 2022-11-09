@@ -72,4 +72,13 @@ class ProductController extends GetxController {
         .delete();
     Fluttertoast.showToast(msg: "Product is removed");
   }
+  deleteFavouriteProduct({required productId}) {
+    firestore
+        .collection('user-favourite-items')
+        .doc(firebaseAuth.currentUser!.email)
+        .collection("items")
+        .doc(productId)
+        .delete();
+    Fluttertoast.showToast(msg: "Product is removed");
+  }
 }
